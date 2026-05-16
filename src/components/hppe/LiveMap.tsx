@@ -61,7 +61,7 @@ export function LiveMap({ readings, height = 480, focusVillageId }: Props) {
           const dLat = (Math.cos(windRad) * (r.aqi / 50)) / 100;
           const dLng = (Math.sin(windRad) * (r.aqi / 50)) / 100;
           return (
-            <div key={r.id}>
+            <div key={r.id} style={{ display: "contents" }}>
               <Circle
                 center={[r.lat, r.lng]}
                 radius={radius}
