@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from "react";
-import { MapContainer, TileLayer, CircleMarker, Tooltip, Circle, Polyline, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Tooltip, Circle, Polyline } from "react-leaflet";
+import { Fragment } from "react";
 import L from "leaflet";
 import { INDUSTRIES, VILLAGES, aqiCategory, type SensorReading } from "@/lib/hppe/data";
 
@@ -61,7 +62,7 @@ export function LiveMap({ readings, height = 480, focusVillageId }: Props) {
           const dLat = (Math.cos(windRad) * (r.aqi / 50)) / 100;
           const dLng = (Math.sin(windRad) * (r.aqi / 50)) / 100;
           return (
-            <div key={r.id} style={{ display: "contents" }}>
+            <Fragment key={r.id}>
               <Circle
                 center={[r.lat, r.lng]}
                 radius={radius}
@@ -89,7 +90,7 @@ export function LiveMap({ readings, height = 480, focusVillageId }: Props) {
                   Wind: {r.windDir}° @ {r.windSpeed} m/s
                 </Tooltip>
               </CircleMarker>
-            </div>
+            </Fragment>
           );
         })}
       </MapContainer>
