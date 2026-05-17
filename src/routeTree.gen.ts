@@ -12,17 +12,27 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VillagesRouteImport } from './routes/villages'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SensorsRouteImport } from './routes/sensors'
+import { Route as SarpanchRouteImport } from './routes/sarpanch'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as MaintenanceRouteImport } from './routes/maintenance'
+import { Route as InspectorRouteImport } from './routes/inspector'
 import { Route as InferenceRouteImport } from './routes/inference'
+import { Route as IndustryRouteImport } from './routes/industry'
 import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as HelpRouteImport } from './routes/help'
+import { Route as FieldRouteImport } from './routes/field'
 import { Route as EmergencyRouteImport } from './routes/emergency'
+import { Route as DistrictRouteImport } from './routes/district'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ComplianceRouteImport } from './routes/compliance'
 import { Route as ComplaintsRouteImport } from './routes/complaints'
+import { Route as BroadcastRouteImport } from './routes/broadcast'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AnalystRouteImport } from './routes/analyst'
 import { Route as AlertsRouteImport } from './routes/alerts'
+import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as IndexRouteImport } from './routes/index'
 
 const VillagesRoute = VillagesRouteImport.update({
@@ -40,6 +50,11 @@ const SensorsRoute = SensorsRouteImport.update({
   path: '/sensors',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SarpanchRoute = SarpanchRouteImport.update({
+  id: '/sarpanch',
+  path: '/sarpanch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReportsRoute = ReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
@@ -55,9 +70,24 @@ const MapRoute = MapRouteImport.update({
   path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaintenanceRoute = MaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspectorRoute = InspectorRouteImport.update({
+  id: '/inspector',
+  path: '/inspector',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InferenceRoute = InferenceRouteImport.update({
   id: '/inference',
   path: '/inference',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustryRoute = IndustryRouteImport.update({
+  id: '/industry',
+  path: '/industry',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndustriesRoute = IndustriesRouteImport.update({
@@ -70,9 +100,19 @@ const HelpRoute = HelpRouteImport.update({
   path: '/help',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FieldRoute = FieldRouteImport.update({
+  id: '/field',
+  path: '/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmergencyRoute = EmergencyRouteImport.update({
   id: '/emergency',
   path: '/emergency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DistrictRoute = DistrictRouteImport.update({
+  id: '/district',
+  path: '/district',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -80,9 +120,19 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComplianceRoute = ComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComplaintsRoute = ComplaintsRouteImport.update({
   id: '/complaints',
   path: '/complaints',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BroadcastRoute = BroadcastRouteImport.update({
+  id: '/broadcast',
+  path: '/broadcast',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
@@ -90,9 +140,19 @@ const AnalyticsRoute = AnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalystRoute = AnalystRouteImport.update({
+  id: '/analyst',
+  path: '/analyst',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AlertsRoute = AlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -103,34 +163,54 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/alerts': typeof AlertsRoute
+  '/analyst': typeof AnalystRoute
   '/analytics': typeof AnalyticsRoute
+  '/broadcast': typeof BroadcastRoute
   '/complaints': typeof ComplaintsRoute
+  '/compliance': typeof ComplianceRoute
   '/dashboard': typeof DashboardRoute
+  '/district': typeof DistrictRoute
   '/emergency': typeof EmergencyRoute
+  '/field': typeof FieldRoute
   '/help': typeof HelpRoute
   '/industries': typeof IndustriesRoute
+  '/industry': typeof IndustryRoute
   '/inference': typeof InferenceRoute
+  '/inspector': typeof InspectorRoute
+  '/maintenance': typeof MaintenanceRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
   '/reports': typeof ReportsRoute
+  '/sarpanch': typeof SarpanchRoute
   '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/alerts': typeof AlertsRoute
+  '/analyst': typeof AnalystRoute
   '/analytics': typeof AnalyticsRoute
+  '/broadcast': typeof BroadcastRoute
   '/complaints': typeof ComplaintsRoute
+  '/compliance': typeof ComplianceRoute
   '/dashboard': typeof DashboardRoute
+  '/district': typeof DistrictRoute
   '/emergency': typeof EmergencyRoute
+  '/field': typeof FieldRoute
   '/help': typeof HelpRoute
   '/industries': typeof IndustriesRoute
+  '/industry': typeof IndustryRoute
   '/inference': typeof InferenceRoute
+  '/inspector': typeof InspectorRoute
+  '/maintenance': typeof MaintenanceRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
   '/reports': typeof ReportsRoute
+  '/sarpanch': typeof SarpanchRoute
   '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
   '/villages': typeof VillagesRoute
@@ -138,17 +218,27 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/alerts': typeof AlertsRoute
+  '/analyst': typeof AnalystRoute
   '/analytics': typeof AnalyticsRoute
+  '/broadcast': typeof BroadcastRoute
   '/complaints': typeof ComplaintsRoute
+  '/compliance': typeof ComplianceRoute
   '/dashboard': typeof DashboardRoute
+  '/district': typeof DistrictRoute
   '/emergency': typeof EmergencyRoute
+  '/field': typeof FieldRoute
   '/help': typeof HelpRoute
   '/industries': typeof IndustriesRoute
+  '/industry': typeof IndustryRoute
   '/inference': typeof InferenceRoute
+  '/inspector': typeof InspectorRoute
+  '/maintenance': typeof MaintenanceRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
   '/reports': typeof ReportsRoute
+  '/sarpanch': typeof SarpanchRoute
   '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
   '/villages': typeof VillagesRoute
@@ -157,51 +247,81 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activity'
     | '/alerts'
+    | '/analyst'
     | '/analytics'
+    | '/broadcast'
     | '/complaints'
+    | '/compliance'
     | '/dashboard'
+    | '/district'
     | '/emergency'
+    | '/field'
     | '/help'
     | '/industries'
+    | '/industry'
     | '/inference'
+    | '/inspector'
+    | '/maintenance'
     | '/map'
     | '/notifications'
     | '/reports'
+    | '/sarpanch'
     | '/sensors'
     | '/settings'
     | '/villages'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activity'
     | '/alerts'
+    | '/analyst'
     | '/analytics'
+    | '/broadcast'
     | '/complaints'
+    | '/compliance'
     | '/dashboard'
+    | '/district'
     | '/emergency'
+    | '/field'
     | '/help'
     | '/industries'
+    | '/industry'
     | '/inference'
+    | '/inspector'
+    | '/maintenance'
     | '/map'
     | '/notifications'
     | '/reports'
+    | '/sarpanch'
     | '/sensors'
     | '/settings'
     | '/villages'
   id:
     | '__root__'
     | '/'
+    | '/activity'
     | '/alerts'
+    | '/analyst'
     | '/analytics'
+    | '/broadcast'
     | '/complaints'
+    | '/compliance'
     | '/dashboard'
+    | '/district'
     | '/emergency'
+    | '/field'
     | '/help'
     | '/industries'
+    | '/industry'
     | '/inference'
+    | '/inspector'
+    | '/maintenance'
     | '/map'
     | '/notifications'
     | '/reports'
+    | '/sarpanch'
     | '/sensors'
     | '/settings'
     | '/villages'
@@ -209,17 +329,27 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
   AlertsRoute: typeof AlertsRoute
+  AnalystRoute: typeof AnalystRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  BroadcastRoute: typeof BroadcastRoute
   ComplaintsRoute: typeof ComplaintsRoute
+  ComplianceRoute: typeof ComplianceRoute
   DashboardRoute: typeof DashboardRoute
+  DistrictRoute: typeof DistrictRoute
   EmergencyRoute: typeof EmergencyRoute
+  FieldRoute: typeof FieldRoute
   HelpRoute: typeof HelpRoute
   IndustriesRoute: typeof IndustriesRoute
+  IndustryRoute: typeof IndustryRoute
   InferenceRoute: typeof InferenceRoute
+  InspectorRoute: typeof InspectorRoute
+  MaintenanceRoute: typeof MaintenanceRoute
   MapRoute: typeof MapRoute
   NotificationsRoute: typeof NotificationsRoute
   ReportsRoute: typeof ReportsRoute
+  SarpanchRoute: typeof SarpanchRoute
   SensorsRoute: typeof SensorsRoute
   SettingsRoute: typeof SettingsRoute
   VillagesRoute: typeof VillagesRoute
@@ -248,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SensorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sarpanch': {
+      id: '/sarpanch'
+      path: '/sarpanch'
+      fullPath: '/sarpanch'
+      preLoaderRoute: typeof SarpanchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reports': {
       id: '/reports'
       path: '/reports'
@@ -269,11 +406,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/maintenance': {
+      id: '/maintenance'
+      path: '/maintenance'
+      fullPath: '/maintenance'
+      preLoaderRoute: typeof MaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspector': {
+      id: '/inspector'
+      path: '/inspector'
+      fullPath: '/inspector'
+      preLoaderRoute: typeof InspectorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inference': {
       id: '/inference'
       path: '/inference'
       fullPath: '/inference'
       preLoaderRoute: typeof InferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industry': {
+      id: '/industry'
+      path: '/industry'
+      fullPath: '/industry'
+      preLoaderRoute: typeof IndustryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/industries': {
@@ -290,11 +448,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/field': {
+      id: '/field'
+      path: '/field'
+      fullPath: '/field'
+      preLoaderRoute: typeof FieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/emergency': {
       id: '/emergency'
       path: '/emergency'
       fullPath: '/emergency'
       preLoaderRoute: typeof EmergencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/district': {
+      id: '/district'
+      path: '/district'
+      fullPath: '/district'
+      preLoaderRoute: typeof DistrictRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -304,11 +476,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compliance': {
+      id: '/compliance'
+      path: '/compliance'
+      fullPath: '/compliance'
+      preLoaderRoute: typeof ComplianceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/complaints': {
       id: '/complaints'
       path: '/complaints'
       fullPath: '/complaints'
       preLoaderRoute: typeof ComplaintsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/broadcast': {
+      id: '/broadcast'
+      path: '/broadcast'
+      fullPath: '/broadcast'
+      preLoaderRoute: typeof BroadcastRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/analytics': {
@@ -318,11 +504,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analyst': {
+      id: '/analyst'
+      path: '/analyst'
+      fullPath: '/analyst'
+      preLoaderRoute: typeof AnalystRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/alerts': {
       id: '/alerts'
       path: '/alerts'
       fullPath: '/alerts'
       preLoaderRoute: typeof AlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -337,17 +537,27 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
   AlertsRoute: AlertsRoute,
+  AnalystRoute: AnalystRoute,
   AnalyticsRoute: AnalyticsRoute,
+  BroadcastRoute: BroadcastRoute,
   ComplaintsRoute: ComplaintsRoute,
+  ComplianceRoute: ComplianceRoute,
   DashboardRoute: DashboardRoute,
+  DistrictRoute: DistrictRoute,
   EmergencyRoute: EmergencyRoute,
+  FieldRoute: FieldRoute,
   HelpRoute: HelpRoute,
   IndustriesRoute: IndustriesRoute,
+  IndustryRoute: IndustryRoute,
   InferenceRoute: InferenceRoute,
+  InspectorRoute: InspectorRoute,
+  MaintenanceRoute: MaintenanceRoute,
   MapRoute: MapRoute,
   NotificationsRoute: NotificationsRoute,
   ReportsRoute: ReportsRoute,
+  SarpanchRoute: SarpanchRoute,
   SensorsRoute: SensorsRoute,
   SettingsRoute: SettingsRoute,
   VillagesRoute: VillagesRoute,
