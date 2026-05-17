@@ -10,10 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VillagesRouteImport } from './routes/villages'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SensorsRouteImport } from './routes/sensors'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as InferenceRouteImport } from './routes/inference'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as EmergencyRouteImport } from './routes/emergency'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ComplaintsRouteImport } from './routes/complaints'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
@@ -25,9 +30,24 @@ const VillagesRoute = VillagesRouteImport.update({
   path: '/villages',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SensorsRoute = SensorsRouteImport.update({
   id: '/sensors',
   path: '/sensors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MapRoute = MapRouteImport.update({
@@ -43,6 +63,16 @@ const InferenceRoute = InferenceRouteImport.update({
 const IndustriesRoute = IndustriesRouteImport.update({
   id: '/industries',
   path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyRoute = EmergencyRouteImport.update({
+  id: '/emergency',
+  path: '/emergency',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -77,10 +107,15 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof AnalyticsRoute
   '/complaints': typeof ComplaintsRoute
   '/dashboard': typeof DashboardRoute
+  '/emergency': typeof EmergencyRoute
+  '/help': typeof HelpRoute
   '/industries': typeof IndustriesRoute
   '/inference': typeof InferenceRoute
   '/map': typeof MapRoute
+  '/notifications': typeof NotificationsRoute
+  '/reports': typeof ReportsRoute
   '/sensors': typeof SensorsRoute
+  '/settings': typeof SettingsRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRoutesByTo {
@@ -89,10 +124,15 @@ export interface FileRoutesByTo {
   '/analytics': typeof AnalyticsRoute
   '/complaints': typeof ComplaintsRoute
   '/dashboard': typeof DashboardRoute
+  '/emergency': typeof EmergencyRoute
+  '/help': typeof HelpRoute
   '/industries': typeof IndustriesRoute
   '/inference': typeof InferenceRoute
   '/map': typeof MapRoute
+  '/notifications': typeof NotificationsRoute
+  '/reports': typeof ReportsRoute
   '/sensors': typeof SensorsRoute
+  '/settings': typeof SettingsRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRoutesById {
@@ -102,10 +142,15 @@ export interface FileRoutesById {
   '/analytics': typeof AnalyticsRoute
   '/complaints': typeof ComplaintsRoute
   '/dashboard': typeof DashboardRoute
+  '/emergency': typeof EmergencyRoute
+  '/help': typeof HelpRoute
   '/industries': typeof IndustriesRoute
   '/inference': typeof InferenceRoute
   '/map': typeof MapRoute
+  '/notifications': typeof NotificationsRoute
+  '/reports': typeof ReportsRoute
   '/sensors': typeof SensorsRoute
+  '/settings': typeof SettingsRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRouteTypes {
@@ -116,10 +161,15 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/complaints'
     | '/dashboard'
+    | '/emergency'
+    | '/help'
     | '/industries'
     | '/inference'
     | '/map'
+    | '/notifications'
+    | '/reports'
     | '/sensors'
+    | '/settings'
     | '/villages'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -128,10 +178,15 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/complaints'
     | '/dashboard'
+    | '/emergency'
+    | '/help'
     | '/industries'
     | '/inference'
     | '/map'
+    | '/notifications'
+    | '/reports'
     | '/sensors'
+    | '/settings'
     | '/villages'
   id:
     | '__root__'
@@ -140,10 +195,15 @@ export interface FileRouteTypes {
     | '/analytics'
     | '/complaints'
     | '/dashboard'
+    | '/emergency'
+    | '/help'
     | '/industries'
     | '/inference'
     | '/map'
+    | '/notifications'
+    | '/reports'
     | '/sensors'
+    | '/settings'
     | '/villages'
   fileRoutesById: FileRoutesById
 }
@@ -153,10 +213,15 @@ export interface RootRouteChildren {
   AnalyticsRoute: typeof AnalyticsRoute
   ComplaintsRoute: typeof ComplaintsRoute
   DashboardRoute: typeof DashboardRoute
+  EmergencyRoute: typeof EmergencyRoute
+  HelpRoute: typeof HelpRoute
   IndustriesRoute: typeof IndustriesRoute
   InferenceRoute: typeof InferenceRoute
   MapRoute: typeof MapRoute
+  NotificationsRoute: typeof NotificationsRoute
+  ReportsRoute: typeof ReportsRoute
   SensorsRoute: typeof SensorsRoute
+  SettingsRoute: typeof SettingsRoute
   VillagesRoute: typeof VillagesRoute
 }
 
@@ -169,11 +234,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VillagesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sensors': {
       id: '/sensors'
       path: '/sensors'
       fullPath: '/sensors'
       preLoaderRoute: typeof SensorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/map': {
@@ -195,6 +281,20 @@ declare module '@tanstack/react-router' {
       path: '/industries'
       fullPath: '/industries'
       preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency': {
+      id: '/emergency'
+      path: '/emergency'
+      fullPath: '/emergency'
+      preLoaderRoute: typeof EmergencyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -241,12 +341,27 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsRoute: AnalyticsRoute,
   ComplaintsRoute: ComplaintsRoute,
   DashboardRoute: DashboardRoute,
+  EmergencyRoute: EmergencyRoute,
+  HelpRoute: HelpRoute,
   IndustriesRoute: IndustriesRoute,
   InferenceRoute: InferenceRoute,
   MapRoute: MapRoute,
+  NotificationsRoute: NotificationsRoute,
+  ReportsRoute: ReportsRoute,
   SensorsRoute: SensorsRoute,
+  SettingsRoute: SettingsRoute,
   VillagesRoute: VillagesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
