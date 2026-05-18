@@ -17,6 +17,7 @@ import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as InspectorRouteImport } from './routes/inspector'
 import { Route as InferenceRouteImport } from './routes/inference'
 import { Route as IndustryRouteImport } from './routes/industry'
@@ -73,6 +74,11 @@ const MapRoute = MapRouteImport.update({
 const MaintenanceRoute = MaintenanceRouteImport.update({
   id: '/maintenance',
   path: '/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InspectorRoute = InspectorRouteImport.update({
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/industry': typeof IndustryRoute
   '/inference': typeof InferenceRoute
   '/inspector': typeof InspectorRoute
+  '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
@@ -206,6 +213,7 @@ export interface FileRoutesByTo {
   '/industry': typeof IndustryRoute
   '/inference': typeof InferenceRoute
   '/inspector': typeof InspectorRoute
+  '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
@@ -234,6 +242,7 @@ export interface FileRoutesById {
   '/industry': typeof IndustryRoute
   '/inference': typeof InferenceRoute
   '/inspector': typeof InspectorRoute
+  '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
@@ -263,6 +272,7 @@ export interface FileRouteTypes {
     | '/industry'
     | '/inference'
     | '/inspector'
+    | '/login'
     | '/maintenance'
     | '/map'
     | '/notifications'
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/industry'
     | '/inference'
     | '/inspector'
+    | '/login'
     | '/maintenance'
     | '/map'
     | '/notifications'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/industry'
     | '/inference'
     | '/inspector'
+    | '/login'
     | '/maintenance'
     | '/map'
     | '/notifications'
@@ -345,6 +357,7 @@ export interface RootRouteChildren {
   IndustryRoute: typeof IndustryRoute
   InferenceRoute: typeof InferenceRoute
   InspectorRoute: typeof InspectorRoute
+  LoginRoute: typeof LoginRoute
   MaintenanceRoute: typeof MaintenanceRoute
   MapRoute: typeof MapRoute
   NotificationsRoute: typeof NotificationsRoute
@@ -411,6 +424,13 @@ declare module '@tanstack/react-router' {
       path: '/maintenance'
       fullPath: '/maintenance'
       preLoaderRoute: typeof MaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inspector': {
@@ -553,6 +573,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndustryRoute: IndustryRoute,
   InferenceRoute: InferenceRoute,
   InspectorRoute: InspectorRoute,
+  LoginRoute: LoginRoute,
   MaintenanceRoute: MaintenanceRoute,
   MapRoute: MapRoute,
   NotificationsRoute: NotificationsRoute,
