@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Nav } from "@/components/hppe/Nav";
+import { useAuth } from "@/components/hppe/useAuth";
 import { ClientOnly } from "@/components/hppe/ClientOnly";
 import { LiveMap } from "@/components/hppe/LiveMap";
 import { SensorCard } from "@/components/hppe/SensorCard";
@@ -23,6 +25,9 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function Dashboard() {
+  const { isAuthed } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => { if (!isAuthed) navigate({ to: "/login" }); }, [isAuthed, navigate]);
   const { readings } = useLiveReadings(2500);
   const [selectedId, setSelectedId] = useState<string>("n6"); // Vatva-Lake by default
   const selected = readings.find((r) => r.id === selectedId) ?? readings[0];
