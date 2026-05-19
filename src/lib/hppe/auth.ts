@@ -1,4 +1,5 @@
 import type { RoleId } from "./roles";
+import { evaluateAccess, recordLogin, denialMessage, type AccessDenialReason } from "./access";
 
 export interface DemoAccount {
   email: string;
@@ -37,6 +38,27 @@ export function authenticate(email: string, password: string): Session | null {
   );
   if (!acc) return null;
   return { email: acc.email, name: acc.name, role: acc.role, organisation: acc.organisation, issuedAt: Date.now() };
+}
+
+export interface AuthResult {
+  ok: boolean;
+  session?: Session;
+  reason?: AccessDenialReason | "bad_credentials";
+  message?: string;
+}
+
+/**
+ * Two-stage validation:
+ * 1. Credential check against demo directory.
+ * 2. Access policy gate (whitelist / domain / suspension / expiry).
+ */
+export function authenticateWithPolicy(email: string, password: string): AuthResult {
+  const cred = authenticate(email, password);
+  if (!cred) return { ok: false, reason: "bad_credentials", message: "Credentials not recognised." };
+  const verdict = evaluateAccess(cred.email);
+  if (!verdict.allowed) return { ok: false, reason: verdict.reason, message: denialMessage(verdict.reason) };
+  recordLogin(cred.email);
+  return { ok: true, session: cred };
 }
 
 export function readSession(): Session | null {
