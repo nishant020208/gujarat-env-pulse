@@ -32,9 +32,15 @@ function LoginPage() {
     setError(null);
     setLoading(true);
     setTimeout(() => {
-      const s = login(email, password);
+      const result = login(email, password);
       setLoading(false);
-      if (!s) { setError("Credentials not recognised. Contact your administrator."); return; }
+      if (!result.ok) {
+        setError(result.message ?? "Access denied.");
+        if (result.reason && result.reason !== "bad_credentials") {
+          navigate({ to: "/unauthorized", search: { reason: result.reason } as never });
+        }
+        return;
+      }
       navigate({ to: "/dashboard" });
     }, 350);
   };

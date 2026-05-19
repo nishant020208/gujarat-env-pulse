@@ -10,12 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VillagesRouteImport } from './routes/villages'
+import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SensorsRouteImport } from './routes/sensors'
 import { Route as SarpanchRouteImport } from './routes/sarpanch'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as MaintenanceModeRouteImport } from './routes/maintenance-mode'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InspectorRouteImport } from './routes/inspector'
@@ -34,11 +36,17 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AnalystRouteImport } from './routes/analyst'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as ActivityRouteImport } from './routes/activity'
+import { Route as AccessRouteImport } from './routes/access'
 import { Route as IndexRouteImport } from './routes/index'
 
 const VillagesRoute = VillagesRouteImport.update({
   id: '/villages',
   path: '/villages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnauthorizedRoute = UnauthorizedRouteImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -69,6 +77,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
 const MapRoute = MapRouteImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaintenanceModeRoute = MaintenanceModeRouteImport.update({
+  id: '/maintenance-mode',
+  path: '/maintenance-mode',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MaintenanceRoute = MaintenanceRouteImport.update({
@@ -161,6 +174,11 @@ const ActivityRoute = ActivityRouteImport.update({
   path: '/activity',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccessRoute = AccessRouteImport.update({
+  id: '/access',
+  path: '/access',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -169,6 +187,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/access': typeof AccessRoute
   '/activity': typeof ActivityRoute
   '/alerts': typeof AlertsRoute
   '/analyst': typeof AnalystRoute
@@ -187,16 +206,19 @@ export interface FileRoutesByFullPath {
   '/inspector': typeof InspectorRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/maintenance-mode': typeof MaintenanceModeRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
   '/reports': typeof ReportsRoute
   '/sarpanch': typeof SarpanchRoute
   '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/access': typeof AccessRoute
   '/activity': typeof ActivityRoute
   '/alerts': typeof AlertsRoute
   '/analyst': typeof AnalystRoute
@@ -215,17 +237,20 @@ export interface FileRoutesByTo {
   '/inspector': typeof InspectorRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/maintenance-mode': typeof MaintenanceModeRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
   '/reports': typeof ReportsRoute
   '/sarpanch': typeof SarpanchRoute
   '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/access': typeof AccessRoute
   '/activity': typeof ActivityRoute
   '/alerts': typeof AlertsRoute
   '/analyst': typeof AnalystRoute
@@ -244,18 +269,21 @@ export interface FileRoutesById {
   '/inspector': typeof InspectorRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/maintenance-mode': typeof MaintenanceModeRoute
   '/map': typeof MapRoute
   '/notifications': typeof NotificationsRoute
   '/reports': typeof ReportsRoute
   '/sarpanch': typeof SarpanchRoute
   '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
+  '/unauthorized': typeof UnauthorizedRoute
   '/villages': typeof VillagesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/access'
     | '/activity'
     | '/alerts'
     | '/analyst'
@@ -274,16 +302,19 @@ export interface FileRouteTypes {
     | '/inspector'
     | '/login'
     | '/maintenance'
+    | '/maintenance-mode'
     | '/map'
     | '/notifications'
     | '/reports'
     | '/sarpanch'
     | '/sensors'
     | '/settings'
+    | '/unauthorized'
     | '/villages'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/access'
     | '/activity'
     | '/alerts'
     | '/analyst'
@@ -302,16 +333,19 @@ export interface FileRouteTypes {
     | '/inspector'
     | '/login'
     | '/maintenance'
+    | '/maintenance-mode'
     | '/map'
     | '/notifications'
     | '/reports'
     | '/sarpanch'
     | '/sensors'
     | '/settings'
+    | '/unauthorized'
     | '/villages'
   id:
     | '__root__'
     | '/'
+    | '/access'
     | '/activity'
     | '/alerts'
     | '/analyst'
@@ -330,17 +364,20 @@ export interface FileRouteTypes {
     | '/inspector'
     | '/login'
     | '/maintenance'
+    | '/maintenance-mode'
     | '/map'
     | '/notifications'
     | '/reports'
     | '/sarpanch'
     | '/sensors'
     | '/settings'
+    | '/unauthorized'
     | '/villages'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessRoute: typeof AccessRoute
   ActivityRoute: typeof ActivityRoute
   AlertsRoute: typeof AlertsRoute
   AnalystRoute: typeof AnalystRoute
@@ -359,12 +396,14 @@ export interface RootRouteChildren {
   InspectorRoute: typeof InspectorRoute
   LoginRoute: typeof LoginRoute
   MaintenanceRoute: typeof MaintenanceRoute
+  MaintenanceModeRoute: typeof MaintenanceModeRoute
   MapRoute: typeof MapRoute
   NotificationsRoute: typeof NotificationsRoute
   ReportsRoute: typeof ReportsRoute
   SarpanchRoute: typeof SarpanchRoute
   SensorsRoute: typeof SensorsRoute
   SettingsRoute: typeof SettingsRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
   VillagesRoute: typeof VillagesRoute
 }
 
@@ -375,6 +414,13 @@ declare module '@tanstack/react-router' {
       path: '/villages'
       fullPath: '/villages'
       preLoaderRoute: typeof VillagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -417,6 +463,13 @@ declare module '@tanstack/react-router' {
       path: '/map'
       fullPath: '/map'
       preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maintenance-mode': {
+      id: '/maintenance-mode'
+      path: '/maintenance-mode'
+      fullPath: '/maintenance-mode'
+      preLoaderRoute: typeof MaintenanceModeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/maintenance': {
@@ -545,6 +598,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/access': {
+      id: '/access'
+      path: '/access'
+      fullPath: '/access'
+      preLoaderRoute: typeof AccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -557,6 +617,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessRoute: AccessRoute,
   ActivityRoute: ActivityRoute,
   AlertsRoute: AlertsRoute,
   AnalystRoute: AnalystRoute,
@@ -575,24 +636,16 @@ const rootRouteChildren: RootRouteChildren = {
   InspectorRoute: InspectorRoute,
   LoginRoute: LoginRoute,
   MaintenanceRoute: MaintenanceRoute,
+  MaintenanceModeRoute: MaintenanceModeRoute,
   MapRoute: MapRoute,
   NotificationsRoute: NotificationsRoute,
   ReportsRoute: ReportsRoute,
   SarpanchRoute: SarpanchRoute,
   SensorsRoute: SensorsRoute,
   SettingsRoute: SettingsRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
   VillagesRoute: VillagesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
