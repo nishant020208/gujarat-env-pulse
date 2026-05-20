@@ -1,17 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { MapContainer, TileLayer, CircleMarker, Tooltip, Circle, Polyline } from "react-leaflet";
-import { Fragment } from "react";
-import L from "leaflet";
+import { Fragment, useEffect, useState } from "react";
 import { INDUSTRIES, VILLAGES, aqiCategory, type SensorReading } from "@/lib/hppe/data";
-
-// Fix default marker icons in bundled environments
-// @ts-expect-error private
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
 
 interface Props {
   readings: SensorReading[];
@@ -20,12 +8,52 @@ interface Props {
 }
 
 export function LiveMap({ readings, height = 480, focusVillageId }: Props) {
+  const [mapLib, setMapLib] = useState<null | typeof import("react-leaflet")>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let cancelled = false;
+
+    Promise.all([import("react-leaflet"), import("leaflet")])
+      .then(([reactLeaflet, leafletModule]) => {
+        if (cancelled) return;
+
+        const leaflet = ((leafletModule as unknown as { default?: typeof import("leaflet") }).default ?? leafletModule) as typeof import("leaflet");
+        delete (leaflet.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
+        leaflet.Icon.Default.mergeOptions({
+          iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+          iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+          shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+        });
+
+        setMapLib(reactLeaflet);
+      })
+      .catch((error) => {
+        console.error("Failed to initialize live map", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const center: [number, number] = focusVillageId
     ? (() => {
         const v = VILLAGES.find((v) => v.id === focusVillageId);
         return v ? [v.lat, v.lng] : [21.3, 72.95];
       })()
     : [21.3, 72.95];
+
+  if (!mapLib) {
+    return (
+      <div className="relative rounded-2xl overflow-hidden border border-border/50 glass" style={{ height }}>
+        <div className="h-full w-full grid place-items-center text-sm text-muted-foreground">Initializing GIS…</div>
+      </div>
+    );
+  }
+
+  const { MapContainer, TileLayer, CircleMarker, Tooltip, Circle, Polyline } = mapLib;
 
   return (
     <div className="relative rounded-2xl overflow-hidden border border-border/50 glass" style={{ height }}>
