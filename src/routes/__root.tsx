@@ -1,14 +1,12 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
+import type { QueryClient } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
+  useMatches,
 } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
@@ -75,58 +73,45 @@ function RootNotFound() {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pollution Engine" },
-      { name: "description", content: "Real-time environmental intelligence and GSPCB complaint generation for Gujarat industrial-corridor villages." },
-      { property: "og:title", content: "Pollution Engine" },
-      { property: "og:description", content: "Real-time environmental intelligence and GSPCB complaint generation for Gujarat industrial-corridor villages." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Pollution Engine" },
-      { name: "twitter:description", content: "Real-time environmental intelligence and GSPCB complaint generation for Gujarat industrial-corridor villages." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4122ba99-1e3c-44b6-9dff-e2a0733055be" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4122ba99-1e3c-44b6-9dff-e2a0733055be" },
-    ],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: RootNotFound,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
+function DocumentHead() {
+  const matches = useMatches();
+  useEffect(() => {
+    for (let i = matches.length - 1; i >= 0; i--) {
+      const m = matches[i] as unknown as {
+        routeId: string;
+        context?: { head?: { meta?: Array<{ title?: string }> } };
+      };
+      // TanStack Router exposes head() output on match meta when present.
+      // Fall back to scanning options on the router routes map.
+      void m;
+    }
+    // Resolve title from any match that defined head() with a title meta.
+    const router = (window as unknown as { __TSR_ROUTER__?: { routesById?: Record<string, { options?: { head?: () => { meta?: Array<Record<string, unknown>> } } }> } }).__TSR_ROUTER__;
+    let title: string | undefined;
+    for (let i = matches.length - 1; i >= 0; i--) {
+      const id = (matches[i] as { routeId: string }).routeId;
+      const route = router?.routesById?.[id];
+      const meta = route?.options?.head?.()?.meta;
+      const found = meta?.find((m) => "title" in m && typeof m.title === "string") as
+        | { title: string }
+        | undefined;
+      if (found?.title) { title = found.title; break; }
+    }
+    if (title) document.title = title;
+  }, [matches]);
+  return null;
 }
 
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
+      <DocumentHead />
       <Outlet />
-    </QueryClientProvider>
+    </>
   );
 }
