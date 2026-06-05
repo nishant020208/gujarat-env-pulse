@@ -7,6 +7,7 @@ import {
   useRouter,
   useMatches,
 } from "@tanstack/react-router";
+import { getRouter } from "../router";
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
@@ -81,23 +82,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function DocumentHead() {
   const matches = useMatches();
   useEffect(() => {
-    for (let i = matches.length - 1; i >= 0; i--) {
-      const m = matches[i] as unknown as {
-        routeId: string;
-        context?: { head?: { meta?: Array<{ title?: string }> } };
-      };
-      // TanStack Router exposes head() output on match meta when present.
-      // Fall back to scanning options on the router routes map.
-      void m;
-    }
-    // Resolve title from any match that defined head() with a title meta.
-    const router = (window as unknown as { __TSR_ROUTER__?: { routesById?: Record<string, { options?: { head?: () => { meta?: Array<Record<string, unknown>> } } }> } }).__TSR_ROUTER__;
+    const router = getRouter() as unknown as {
+      routesById: Record<string, { options?: { head?: () => { meta?: Array<Record<string, unknown>> } } }>;
+    };
     let title: string | undefined;
     for (let i = matches.length - 1; i >= 0; i--) {
       const id = (matches[i] as { routeId: string }).routeId;
-      const route = router?.routesById?.[id];
-      const meta = route?.options?.head?.()?.meta;
-      const found = meta?.find((m) => "title" in m && typeof m.title === "string") as
+      const meta = router.routesById?.[id]?.options?.head?.()?.meta;
+      const found = meta?.find((m) => typeof (m as { title?: unknown }).title === "string") as
         | { title: string }
         | undefined;
       if (found?.title) { title = found.title; break; }
