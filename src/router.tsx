@@ -57,10 +57,15 @@ function DefaultRouterNotFound() {
   );
 }
 
-export const getRouter = () => {
-  const queryClient = new QueryClient();
+let _queryClient: QueryClient | undefined;
+export const getQueryClient = () => {
+  if (!_queryClient) _queryClient = new QueryClient();
+  return _queryClient;
+};
 
-  const router = createRouter({
+export const getRouter = () => {
+  const queryClient = getQueryClient();
+  return createRouter({
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
@@ -68,6 +73,10 @@ export const getRouter = () => {
     defaultErrorComponent: DefaultRouterError,
     defaultNotFoundComponent: DefaultRouterNotFound,
   });
-
-  return router;
 };
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: ReturnType<typeof getRouter>;
+  }
+}
