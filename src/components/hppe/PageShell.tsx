@@ -31,6 +31,10 @@ export function PageShell({ title, eyebrow, description, icon: Icon, requireRole
 
   const allowed = isAuthed && (requireRoles ? requireRoles.includes(role) : canAccess(role, path));
 
+  useEffect(() => {
+    if (isAuthed && !allowed) navigate({ to: "/unauthorized", search: { reason: "not_listed" } as never });
+  }, [isAuthed, allowed, navigate]);
+
   return (
     <div className="min-h-screen pt-20">
       <Nav />

@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { readSession, writeSession, authenticate, type Session } from "@/lib/hppe/auth";
+import { readSession, writeSession, authenticateWithPolicy, type Session, type AuthResult } from "@/lib/hppe/auth";
 
 export function useAuth() {
   const [session, setSession] = useState<Session | null>(() => readSession());
@@ -12,10 +12,10 @@ export function useAuth() {
       window.removeEventListener("storage", sync);
     };
   }, []);
-  const login = useCallback((email: string, password: string) => {
-    const s = authenticate(email, password);
-    if (s) writeSession(s);
-    return s;
+  const login = useCallback((email: string, password: string): AuthResult => {
+    const result = authenticateWithPolicy(email, password);
+    if (result.ok && result.session) writeSession(result.session);
+    return result;
   }, []);
   const logout = useCallback(() => writeSession(null), []);
   return { session, login, logout, isAuthed: !!session };

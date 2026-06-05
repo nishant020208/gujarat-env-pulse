@@ -71,6 +71,7 @@ export const TABS: TabDef[] = [
   { id: "broadcast",     label: "Broadcast",          icon: Megaphone,       to: "/broadcast",     group: "Communications", roles: ["super_admin","emergency","sarpanch"], description: "WhatsApp / SMS pollution advisory." },
   { id: "compliance",    label: "Compliance",         icon: ShieldCheck,     to: "/compliance",    group: "Intelligence",   roles: ["super_admin","industry","gspcb_admin"], description: "Industry compliance scoring." },
   { id: "activity",      label: "Activity Log",       icon: Activity,        to: "/activity",      group: "System",         roles: ["super_admin","gspcb_admin"], description: "Audit trail of platform actions." },
+  { id: "access",        label: "Access Control",     icon: ShieldCheck,     to: "/access",        group: "System",         roles: ["super_admin","gspcb_admin"], description: "Authorize, suspend or revoke account access." },
   { id: "settings",      label: "Settings",           icon: Settings,        to: "/settings",      group: "System",         roles: "all", description: "Workspace preferences." },
   { id: "help",          label: "Help Center",        icon: HelpCircle,      to: "/help",          group: "System",         roles: "all", description: "Docs, demo accounts, support." },
 ];
