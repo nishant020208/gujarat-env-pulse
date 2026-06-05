@@ -63,9 +63,11 @@ export const getQueryClient = () => {
   return _queryClient;
 };
 
+let _router: ReturnType<typeof createRouter> | undefined;
 export const getRouter = () => {
+  if (_router) return _router;
   const queryClient = getQueryClient();
-  return createRouter({
+  _router = createRouter({
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
@@ -73,6 +75,7 @@ export const getRouter = () => {
     defaultErrorComponent: DefaultRouterError,
     defaultNotFoundComponent: DefaultRouterNotFound,
   });
+  return _router;
 };
 
 declare module "@tanstack/react-router" {
