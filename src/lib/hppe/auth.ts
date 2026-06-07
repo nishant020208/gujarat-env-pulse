@@ -1,5 +1,6 @@
 import type { RoleId } from "./roles";
-import { evaluateAccess, recordLogin, denialMessage, type AccessDenialReason } from "./access";
+import type { AccessDenialReason } from "./access";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface DemoAccount {
   email: string;
@@ -33,6 +34,7 @@ export interface Session {
 const KEY = "hppe.session.v1";
 
 export function authenticate(email: string, password: string): Session | null {
+  // legacy demo-fallback (kept for back-compat with any caller still using it)
   const acc = DEMO_ACCOUNTS.find(
     (a) => a.email.toLowerCase() === email.trim().toLowerCase() && a.password === password
   );
@@ -48,17 +50,64 @@ export interface AuthResult {
 }
 
 /**
- * Two-stage validation:
- * 1. Credential check against demo directory.
- * 2. Access policy gate (whitelist / domain / suspension / expiry).
+ * Cloud-backed sign-in. Validates credentials with Supabase, then enforces
+ * the admin-approval workflow stored in the `profiles` table.
  */
-export function authenticateWithPolicy(email: string, password: string): AuthResult {
-  const cred = authenticate(email, password);
-  if (!cred) return { ok: false, reason: "bad_credentials", message: "Credentials not recognised." };
-  const verdict = evaluateAccess(cred.email);
-  if (!verdict.allowed) return { ok: false, reason: verdict.reason, message: denialMessage(verdict.reason) };
-  recordLogin(cred.email);
-  return { ok: true, session: cred };
+export async function authenticateWithPolicy(email: string, password: string): Promise<AuthResult> {
+  const { data, error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+  if (error || !data.user) {
+    return { ok: false, reason: "bad_credentials", message: error?.message ?? "Credentials not recognised." };
+  }
+  // Fetch profile + role
+  const [{ data: profile }, { data: roles }] = await Promise.all([
+    supabase.from("profiles").select("full_name, email, approval_status").eq("id", data.user.id).maybeSingle(),
+    supabase.from("user_roles").select("role").eq("user_id", data.user.id),
+  ]);
+
+  if (!profile) {
+    await supabase.auth.signOut();
+    return { ok: false, reason: "not_listed", message: "Account is missing a profile. Contact admin." };
+  }
+  if (profile.approval_status !== "approved") {
+    await supabase.auth.signOut();
+    return {
+      ok: false,
+      reason: "suspended",
+      message: "Your account is awaiting admin approval.",
+    };
+  }
+
+  const role = (roles?.[0]?.role as RoleId | undefined) ?? "public";
+  const demo = DEMO_ACCOUNTS.find((a) => a.role === role);
+  const session: Session = {
+    email: data.user.email ?? email,
+    name: profile.full_name ?? data.user.email ?? "User",
+    role,
+    organisation: demo?.organisation ?? "HPEE",
+    issuedAt: Date.now(),
+  };
+  return { ok: true, session };
+}
+
+export interface SignUpResult { ok: boolean; message: string }
+
+export async function signUpForApproval(
+  fullName: string,
+  email: string,
+  password: string,
+): Promise<SignUpResult> {
+  const { error } = await supabase.auth.signUp({
+    email: email.trim(),
+    password,
+    options: {
+      data: { full_name: fullName.trim() },
+      emailRedirectTo: typeof window !== "undefined" ? window.location.origin : undefined,
+    },
+  });
+  if (error) return { ok: false, message: error.message };
+  // Immediately sign out — pending users must wait for admin approval.
+  await supabase.auth.signOut();
+  return { ok: true, message: "Registration submitted. Your account is pending admin approval." };
 }
 
 export function readSession(): Session | null {
