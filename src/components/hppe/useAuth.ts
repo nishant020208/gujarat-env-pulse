@@ -1,8 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
-import { readSession, writeSession, authenticateWithPolicy, type Session, type AuthResult } from "@/lib/hppe/auth";
+import {
+  readSession, writeSession, authenticateWithPolicy, signUpForApproval,
+  type Session, type AuthResult, type SignUpResult,
+} from "@/lib/hppe/auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export function useAuth() {
   const [session, setSession] = useState<Session | null>(() => readSession());
+
   useEffect(() => {
     const sync = () => setSession(readSession());
     window.addEventListener("hppe-session", sync);
@@ -12,11 +17,23 @@ export function useAuth() {
       window.removeEventListener("storage", sync);
     };
   }, []);
-  const login = useCallback((email: string, password: string): AuthResult => {
-    const result = authenticateWithPolicy(email, password);
+
+  const login = useCallback(async (email: string, password: string): Promise<AuthResult> => {
+    const result = await authenticateWithPolicy(email, password);
     if (result.ok && result.session) writeSession(result.session);
     return result;
   }, []);
-  const logout = useCallback(() => writeSession(null), []);
-  return { session, login, logout, isAuthed: !!session };
+
+  const signUp = useCallback(
+    (fullName: string, email: string, password: string): Promise<SignUpResult> =>
+      signUpForApproval(fullName, email, password),
+    [],
+  );
+
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut().catch(() => {});
+    writeSession(null);
+  }, []);
+
+  return { session, login, signUp, logout, isAuthed: !!session };
 }
