@@ -2,9 +2,16 @@ import { motion } from "framer-motion";
 import { Navigation, Sparkles, ShieldCheck } from "lucide-react";
 import { inferSource, classifySource, type SensorReading } from "@/lib/hppe/data";
 
-export function SourceInference({ r }: { r: SensorReading }) {
-  const inf = inferSource(r);
-  const cls = classifySource(r);
+export interface SourceInferenceProps {
+  r?: SensorReading;
+  reading?: SensorReading;
+  readings?: SensorReading[];
+}
+
+export function SourceInference(props: SourceInferenceProps) {
+  const targetReading = props.r ?? props.reading;
+  const inf = inferSource(targetReading);
+  const cls = classifySource(targetReading);
   return (
     <div className="glass rounded-2xl p-5 space-y-4">
       <div className="flex items-center justify-between">

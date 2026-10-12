@@ -214,11 +214,13 @@ export function LiveMap({
 
         {/* Sensor readings with plume vectors */}
         {readings.map((r) => {
-          const cat = aqiCategory(r.aqi);
-          const radius = 600 + r.aqi * 10;
-          const windRad = ((r.windDir + 180) % 360) * (Math.PI / 180);
-          const dLat = (Math.cos(windRad) * (r.aqi / 50)) / 100;
-          const dLng = (Math.sin(windRad) * (r.aqi / 50)) / 100;
+          const aqiVal = typeof r?.aqi === "number" ? r.aqi : 50;
+          const cat = aqiCategory(aqiVal);
+          const radius = 600 + aqiVal * 10;
+          const windDirVal = typeof r?.windDir === "number" ? r.windDir : 180;
+          const windRad = ((windDirVal + 180) % 360) * (Math.PI / 180);
+          const dLat = (Math.cos(windRad) * (aqiVal / 50)) / 100;
+          const dLng = (Math.sin(windRad) * (aqiVal / 50)) / 100;
           return (
             <Fragment key={r.id}>
               <Circle
@@ -242,16 +244,16 @@ export function LiveMap({
                   <div className="text-xs font-sans">
                     <strong className="text-sm font-semibold">{r.name}</strong>
                     <div className="mt-1 flex items-center gap-1.5 font-mono">
-                      <span className="font-bold text-foreground">AQI {r.aqi}</span>
+                      <span className="font-bold text-foreground">AQI {aqiVal}</span>
                       <span className="px-1.5 py-0.2 rounded text-[10px] font-bold" style={{ backgroundColor: cat.color, color: "#000" }}>
                         {cat.label}
                       </span>
                     </div>
                     <div className="text-[11px] text-muted-foreground mt-0.5">
-                      PM2.5: {r.pm25} µg/m³ · PM10: {r.pm10} µg/m³
+                      PM2.5: {r.pm25 ?? 35} µg/m³ · PM10: {r.pm10 ?? 60} µg/m³
                     </div>
                     <div className="text-[11px] text-muted-foreground">
-                      Wind: {r.windDir}° @ {r.windSpeed} m/s
+                      Wind: {windDirVal}° @ {r.windSpeed ?? 3.2} m/s
                     </div>
                   </div>
                 </Tooltip>

@@ -104,18 +104,25 @@ export function aqiCategory(aqi: number) {
   return { label: "Hazardous", color: "oklch(0.55 0.30 350)", tone: "hazardous" as const };
 }
 
-export function inferSource(reading: SensorReading): {
+export function inferSource(reading?: Partial<SensorReading> | null): {
   bearing: number; // 0-360, direction toward source
   industry: IndustrialCluster | null;
   confidence: number;
   reasoning: string[];
 } {
+  const rLat = reading?.lat ?? 20.389;
+  const rLng = reading?.lng ?? 72.9106;
+  const windDir = typeof reading?.windDir === "number" ? reading.windDir : 180;
+  const windSpeed = typeof reading?.windSpeed === "number" ? reading.windSpeed : 3.2;
+  const aqi = typeof reading?.aqi === "number" ? reading.aqi : 120;
+  const pm25 = typeof reading?.pm25 === "number" ? reading.pm25 : 65;
+
   // Wind direction is "from" — source is upwind, so bearing = windDir
-  const bearing = reading.windDir % 360;
+  const bearing = ((windDir % 360) + 360) % 360;
   // Find nearest industry roughly upwind
   const candidates = INDUSTRIES.map((ind) => {
-    const dy = ind.lat - reading.lat;
-    const dx = ind.lng - reading.lng;
+    const dy = ind.lat - rLat;
+    const dx = ind.lng - rLng;
     const dist = Math.sqrt(dx * dx + dy * dy);
     const angle = (Math.atan2(dx, dy) * 180) / Math.PI;
     const norm = (angle + 360) % 360;
@@ -124,28 +131,34 @@ export function inferSource(reading: SensorReading): {
     return { ind, dist, delta, score };
   }).sort((a, b) => b.score - a.score);
 
-  const best = candidates[0];
-  const aqiBoost = Math.min(1, reading.aqi / 350);
-  const windBoost = Math.min(1, reading.windSpeed / 8);
+  const best = candidates[0] ?? { ind: INDUSTRIES[0], dist: 1, delta: 0, score: 0.5 };
+  const aqiBoost = Math.min(1, aqi / 350);
+  const windBoost = Math.min(1, windSpeed / 8);
   const confidence = Math.round(Math.min(0.97, 0.35 + best.score * 0.4 + aqiBoost * 0.25 + windBoost * 0.15) * 100);
   return {
     bearing,
     industry: best?.ind ?? null,
     confidence,
     reasoning: [
-      `Wind from ${bearing}° at ${reading.windSpeed} m/s carries plume from upwind sector`,
+      `Wind from ${bearing}° at ${windSpeed} m/s carries plume from upwind sector`,
       `Nearest active industrial cluster: ${best.ind.name} (${best.ind.type})`,
       `Bearing alignment Δ ${Math.round(best.delta)}° within tolerance`,
-      `PM2.5 surge of ${reading.pm25} µg/m³ correlates with active shift window`,
+      `PM2.5 surge of ${pm25} µg/m³ correlates with active shift window`,
     ],
   };
 }
 
-export function classifySource(reading: SensorReading): { label: string; probability: number; reason: string }[] {
-  const so2Ratio = reading.so2 / (reading.pm25 + 1);
-  const industrial = Math.min(0.95, 0.4 + so2Ratio * 1.2 + reading.aqi / 800);
-  const cropBurn = Math.max(0.02, 0.3 - so2Ratio * 0.6 + (reading.temperature > 30 ? 0.15 : 0));
-  const dust = Math.max(0.02, 0.2 + (reading.humidity < 50 ? 0.2 : -0.05));
+export function classifySource(reading?: Partial<SensorReading> | null): { label: string; probability: number; reason: string }[] {
+  const pm25 = typeof reading?.pm25 === "number" ? reading.pm25 : 65;
+  const so2 = typeof reading?.so2 === "number" ? reading.so2 : 18;
+  const aqi = typeof reading?.aqi === "number" ? reading.aqi : 120;
+  const temp = typeof reading?.temperature === "number" ? reading.temperature : 28;
+  const hum = typeof reading?.humidity === "number" ? reading.humidity : 50;
+
+  const so2Ratio = so2 / (pm25 + 1);
+  const industrial = Math.min(0.95, 0.4 + so2Ratio * 1.2 + aqi / 800);
+  const cropBurn = Math.max(0.02, 0.3 - so2Ratio * 0.6 + (temp > 30 ? 0.15 : 0));
+  const dust = Math.max(0.02, 0.2 + (hum < 50 ? 0.2 : -0.05));
   const vehicle = Math.max(0.05, 0.18);
   const total = industrial + cropBurn + dust + vehicle;
   return [

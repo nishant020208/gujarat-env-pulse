@@ -3,15 +3,21 @@ import { AlertTriangle, Activity, Radio } from "lucide-react";
 import { aqiCategory, type SensorReading } from "@/lib/hppe/data";
 
 export function AlertFeed({ readings }: { readings: SensorReading[] }) {
-  const events = readings
-    .filter((r) => r.aqi > 150 || !r.online)
+  const events = (readings || [])
+    .filter((r) => (r?.aqi ?? 0) > 150 || !r?.online)
     .slice(0, 6)
-    .map((r) => ({
-      id: r.id + "-" + r.timestamp,
-      title: !r.online ? `Node offline: ${r.name}` : `${aqiCategory(r.aqi).label} air at ${r.name}`,
-      severity: !r.online ? "warn" : r.aqi > 300 ? "critical" : "alert",
-      meta: `AQI ${r.aqi} · PM2.5 ${r.pm25} µg/m³ · wind ${r.windDir}°`,
-    }));
+    .map((r) => {
+      const aqiVal = r?.aqi ?? 0;
+      const pm25Val = r?.pm25 ?? 0;
+      const windVal = r?.windDir ?? 180;
+      const nameVal = r?.name || "Station";
+      return {
+        id: (r?.id || "node") + "-" + (r?.timestamp || Date.now()),
+        title: !r?.online ? `Node offline: ${nameVal}` : `${aqiCategory(aqiVal).label} air at ${nameVal}`,
+        severity: !r?.online ? "warn" : aqiVal > 300 ? "critical" : "alert",
+        meta: `AQI ${aqiVal} · PM2.5 ${pm25Val} µg/m³ · wind ${windVal}°`,
+      };
+    });
 
   return (
     <div className="glass rounded-2xl p-5 h-full">

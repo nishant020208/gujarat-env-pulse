@@ -1,15 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import type { SensorReading } from "@/lib/hppe/data";
 
-export function TrendChart({ aqi }: { aqi: number }) {
+export interface TrendChartProps {
+  aqi?: number;
+  selected?: SensorReading | null;
+}
+
+export function TrendChart({ aqi, selected }: TrendChartProps) {
+  const currentAqi = typeof aqi === "number" ? aqi : selected?.aqi ?? 110;
   const [data, setData] = useState<{ t: string; aqi: number }[]>(() =>
     Array.from({ length: 30 }, (_, i) => ({ t: String(i), aqi: 80 + Math.round(Math.random() * 50) }))
   );
   const ref = useRef(0);
   useEffect(() => {
     ref.current += 1;
-    setData((d) => [...d.slice(1), { t: String(ref.current), aqi }]);
-  }, [aqi]);
+    setData((d) => [...d.slice(1), { t: String(ref.current), aqi: currentAqi }]);
+  }, [currentAqi]);
 
   return (
     <div className="glass rounded-2xl p-5 h-full">

@@ -156,6 +156,7 @@ function Dashboard() {
             {selected && (
               <SourceInference
                 key={selected.id}
+                r={selected}
                 reading={selected}
                 readings={readings}
               />
