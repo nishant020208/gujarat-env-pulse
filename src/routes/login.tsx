@@ -58,11 +58,6 @@ function LoginPage() {
     navigate({ to: "/dashboard" });
   };
 
-  const fillAdminCredentials = () => {
-    setEmail("admin@hppe.gov.in");
-    setPassword("Hppe@2026");
-    setError(null);
-  };
 
   const submitSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,22 +136,6 @@ function LoginPage() {
             <h1 className="text-2xl font-bold tracking-tight mt-3">Authorised Portal Access</h1>
           </div>
 
-          {/* Quick fill credentials for admin */}
-          <div className="mb-5 p-3 rounded-xl glass border border-primary/30 flex items-center justify-between gap-2">
-            <div className="text-xs">
-              <div className="font-semibold text-primary flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5" /> State Administrator Credentials
-              </div>
-              <div className="text-[11px] text-muted-foreground font-mono mt-0.5">admin@hppe.gov.in</div>
-            </div>
-            <button
-              type="button"
-              onClick={fillAdminCredentials}
-              className="px-2.5 py-1 text-xs rounded-lg bg-primary/20 hover:bg-primary/30 text-primary font-medium transition"
-            >
-              Autofill
-            </button>
-          </div>
 
           {/* Tabs */}
           <div className="relative grid grid-cols-2 mb-6 rounded-xl glass p-1 text-sm">
@@ -207,7 +186,7 @@ function LoginPage() {
                   type="email"
                   value={email}
                   onChange={setEmail}
-                  placeholder="admin@hppe.gov.in"
+                  placeholder="officer@gpcb.gov.in"
                 />
                 <Field
                   icon={Lock}

@@ -118,7 +118,7 @@ export async function authenticateWithPolicy(email: string, password: string): P
   return {
     ok: false,
     reason: "bad_credentials",
-    message: "Invalid credentials. Use official admin email (admin@hppe.gov.in) with authorized password.",
+    message: "Invalid credentials. Please verify your official email and authorized password.",
   };
 }
 

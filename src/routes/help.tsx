@@ -44,7 +44,7 @@ function HelpPage() {
           </div>
 
           <div className="space-y-2.5">
-            {ROLES.map((r) => (
+            {ROLES.map((r, i) => (
               <div
                 key={r.id}
                 className="flex items-center justify-between p-3.5 rounded-xl bg-background/40 border border-border/40"
@@ -57,9 +57,9 @@ function HelpPage() {
                   <div className="text-xs text-muted-foreground mt-0.5">{r.description}</div>
                 </div>
                 <div className="text-right">
-                  <code className="text-xs font-mono text-primary px-2 py-0.5 rounded glass">
-                    {r.id}@hppe.gov.in
-                  </code>
+                  <span className="text-[11px] font-mono text-primary px-2.5 py-1 rounded-lg glass border border-primary/20">
+                    Tier {i + 1} · {r.short}
+                  </span>
                 </div>
               </div>
             ))}
