@@ -132,22 +132,24 @@ VITE_WAQI_API_KEY="your-waqi-api-token"
 
 ---
 
-## 🧪 Testing User Roles (Demo Logins)
+## 🔐 Role-Based Access Control Architecture
 
-The application has a built-in fallback credentials layer to make manual testing of the multi-role matrix straightforward. You can log in using these demo credentials:
+The platform supports 10 specialized institutional roles for Gujarat environmental governance:
 
-| Email | Password | Role | Organization |
+| Role | Access Tier | Clearance Scope | Governing Jurisdiction |
 |---|---|---|---|
-| `admin@hppe.gov.in` | `Hppe@2026` | Super Admin | HPEE Platform Ops |
-| `gspcb@hppe.gov.in` | `Gspcb@2026` | GSPCB Admin | Gujarat Pollution Control Board |
-| `inspector@hppe.gov.in` | `Field@2026` | GSPCB Inspector | GSPCB Vapi Regional Office |
-| `sarpanch@hppe.gov.in` | `Gram@2026` | Village Sarpanch | Sarigam Gram Panchayat |
-| `analyst@hppe.gov.in` | `Data@2026` | Environmental Analyst | HPEE Intelligence Cell |
-| `emergency@hppe.gov.in` | `Ero@2026` | Emergency Responder | District Emergency Ops |
-| `district@hppe.gov.in` | `Dmo@2026` | District Officer | Bharuch District Monitoring |
-| `industry@hppe.gov.in` | `Comply@2026` | Industry Officer | Ankleshwar Industries Assoc. |
-| `maintenance@hppe.gov.in`| `Mesh@2026` | Maintenance Engineer | HPEE Field Engineering |
-| `public@hppe.gov.in` | `Public@2026` | Public Citizen | Community |
+| **Super Admin** | Tier 1 | Full Platform Oversight & Security Ledger | HPEE State Operations |
+| **GSPCB Admin** | Tier 2 | Statewide Incident Management & Personnel Auditing | Gujarat Pollution Control Board HQ |
+| **GSPCB Inspector** | Tier 3 | Field Evidence Docket Management & Sampling | Regional Office (Vapi / Ankleshwar / Surat) |
+| **Village Sarpanch** | Tier 4 | Local Advisory Broadcasts & Form-A Complaints | Gram Panchayat |
+| **Environmental Analyst** | Tier 5 | Gaussian Plume Modeling & Prediction Lab | Intelligence Cell |
+| **Emergency Responder** | Tier 6 | Hazard Sirens & Rapid Evacuation Protocols | District Emergency Operations |
+| **District Officer** | Tier 7 | Inter-District Airshed Analytics | District Collectorate Desk |
+| **Industry Officer** | Tier 8 | Emission Schedules & ESG Compliance Filings | GIDC Industrial Association |
+| **Maintenance Engineer** | Tier 9 | Sensor Calibration & Hardware Mesh Health | Field Engineering Unit |
+| **Public Citizen** | Tier 10 | Public Telemetry & Health Advisories | Citizen Access |
+
+Authorized personnel authenticate using official `@hppe.gov.in` / `@gpcb.gov.in` government email addresses via the secure login portal.
 
 ---
 

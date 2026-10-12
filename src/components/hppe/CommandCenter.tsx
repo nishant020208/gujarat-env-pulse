@@ -100,7 +100,7 @@ export function CommandCenter({ open, onClose }: Props) {
   // Quick actions filtered by access
   const quick = [
     { icon: FileText,       label: "Generate Complaint",  to: "/complaints" },
-    { icon: Zap,            label: "Trigger Demo Surge",  to: "/dashboard" },
+    { icon: Zap,            label: "Atmospheric Telemetry Surge",  to: "/dashboard" },
     { icon: MapIcon,        label: "Live AQI Map",        to: "/map" },
     { icon: Download,       label: "Latest Report",       to: "/reports" },
     { icon: Siren,          label: "Emergency Broadcast", to: "/emergency" },

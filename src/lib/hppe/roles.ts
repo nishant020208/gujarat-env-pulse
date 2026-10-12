@@ -73,7 +73,7 @@ export const TABS: TabDef[] = [
   { id: "activity",      label: "Activity Log",       icon: Activity,        to: "/activity",      group: "System",         roles: ["super_admin","gspcb_admin"], description: "Audit trail of platform actions." },
   { id: "access",        label: "Access Control",     icon: ShieldCheck,     to: "/access",        group: "System",         roles: ["super_admin","gspcb_admin"], description: "Authorize, suspend or revoke account access." },
   { id: "settings",      label: "Settings",           icon: Settings,        to: "/settings",      group: "System",         roles: "all", description: "Workspace preferences." },
-  { id: "help",          label: "Help Center",        icon: HelpCircle,      to: "/help",          group: "System",         roles: "all", description: "Docs, demo accounts, support." },
+  { id: "help",          label: "Help Center",        icon: HelpCircle,      to: "/help",          group: "System",         roles: "all", description: "Statutory operating procedures, protocols & helpdesk." },
 ];
 
 export function tabsForRole(role: RoleId): TabDef[] {

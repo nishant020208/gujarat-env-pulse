@@ -33,7 +33,7 @@ function Landing() {
       <Strip />
       <Modules />
       <HowItWorks />
-      <LiveDemo />
+      <LiveTelemetry />
       <Cta />
       <Footer />
     </div>
@@ -209,7 +209,7 @@ function HowItWorks() {
   );
 }
 
-function LiveDemo() {
+function LiveTelemetry() {
   const { readings } = useLiveReadings(3000);
   return (
     <section id="live" className="py-24 px-6 border-t border-border/30">
