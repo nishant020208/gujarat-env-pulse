@@ -189,3 +189,9 @@
   color: oklch(0.7 0.03 200) !important;
 }
 .leaflet-control-attribution a { color: oklch(0.82 0.20 165) !important; }
+
+/* Dark GIS tile theme for OpenStreetMap without external API keys or watermarks */
+.map-tiles-dark img.leaflet-tile,
+img.leaflet-tile.map-tiles-dark {
+  filter: brightness(0.62) invert(1) contrast(2.4) hue-rotate(200deg) saturate(0.35) !important;
+}

@@ -33,7 +33,7 @@ export function LiveMap({
   showIndustrialClusters = true,
 }: Props) {
   const [mapLib, setMapLib] = useState<null | typeof import("react-leaflet")>(null);
-  const [tileMode, setTileMode] = useState<"dark" | "osm">("dark");
+  const [tileMode, setTileMode] = useState<"dark" | "satellite" | "osm">("dark");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -129,15 +129,27 @@ export function LiveMap({
         <MapClickHandler />
         <MapCenterSync />
 
-        {tileMode === "dark" ? (
+        {tileMode === "dark" && (
           <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            subdomains="abcd"
+            key="dark-gis-tiles"
+            className="map-tiles-dark"
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             maxZoom={19}
           />
-        ) : (
+        )}
+        {tileMode === "satellite" && (
           <TileLayer
+            key="satellite-tiles"
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution='Tiles &copy; <a href="https://www.esri.com/">Esri</a>'
+            maxZoom={19}
+            maxNativeZoom={18}
+          />
+        )}
+        {tileMode === "osm" && (
+          <TileLayer
+            key="osm-standard-tiles"
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             maxZoom={19}
@@ -272,7 +284,16 @@ export function LiveMap({
             tileMode === "dark" ? "bg-primary text-primary-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          Carto Dark
+          Dark GIS
+        </button>
+        <button
+          type="button"
+          onClick={() => setTileMode("satellite")}
+          className={`px-2.5 py-1 rounded-md transition ${
+            tileMode === "satellite" ? "bg-primary text-primary-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Satellite
         </button>
         <button
           type="button"
@@ -281,7 +302,7 @@ export function LiveMap({
             tileMode === "osm" ? "bg-primary text-primary-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          OSM Standard
+          Street View
         </button>
       </div>
 
