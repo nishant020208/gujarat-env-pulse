@@ -4,7 +4,17 @@ import { PageShell } from "@/components/hppe/PageShell";
 import { INDUSTRIES } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/compliance")({
-  head: () => ({ meta: [{ title: "Compliance · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Industrial Regulatory Compliance & ESG Scoring · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Continuous compliance index scoring, stack emission audits, and regulatory conformance ratings against GPCB and CPCB air standards.",
+      },
+      { property: "og:title", content: "Industrial Regulatory Compliance · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/compliance" },
+    ],
+  }),
   component: Page,
 });
 

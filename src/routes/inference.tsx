@@ -7,7 +7,17 @@ import { classifySource } from "@/lib/hppe/data";
 import { useState } from "react";
 
 export const Route = createFileRoute("/inference")({
-  head: () => ({ meta: [{ title: "AI Inference Center · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Atmospheric Plume Dispersion & Source Attribution Model · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Wind vector triangulation, active stack shift correlation, and Gaussian plume physics model attributing pollution surges to originating industrial plants.",
+      },
+      { property: "og:title", content: "Atmospheric Source Attribution Model · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/inference" },
+    ],
+  }),
   component: Page,
 });
 

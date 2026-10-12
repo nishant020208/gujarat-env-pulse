@@ -3,7 +3,17 @@ import { FileBarChart, Download } from "lucide-react";
 import { PageShell } from "@/components/hppe/PageShell";
 
 export const Route = createFileRoute("/reports")({
-  head: () => ({ meta: [{ title: "Reports · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Environmental Compliance & Audit Reports Archive · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Statutory environmental audit reports, quarterly emission disclosures, and district compliance archives aligned with GPCB and CPCB guidelines.",
+      },
+      { property: "og:title", content: "Environmental Compliance Reports · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/reports" },
+    ],
+  }),
   component: Page,
 });
 

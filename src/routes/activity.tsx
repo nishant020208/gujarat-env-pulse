@@ -3,7 +3,17 @@ import { Activity } from "lucide-react";
 import { PageShell } from "@/components/hppe/PageShell";
 
 export const Route = createFileRoute("/activity")({
-  head: () => ({ meta: [{ title: "Activity Log · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Statutory Environmental Audit Log & Activity Ledger · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Immutable forensic activity log recording sensor triggers, statutory Form-A generations, and inspector field acknowledgments across Gujarat.",
+      },
+      { property: "og:title", content: "Statutory Audit Log · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/activity" },
+    ],
+  }),
   component: Page,
 });
 

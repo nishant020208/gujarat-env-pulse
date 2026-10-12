@@ -4,7 +4,17 @@ import { PageShell } from "@/components/hppe/PageShell";
 import { INDUSTRIES } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/industries")({
-  head: () => ({ meta: [{ title: "Industries · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "GIDC Industrial Clusters & Emission Registry · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Surveillance directory of active GIDC industrial clusters across Vapi, Ankleshwar, Dahej, Sachin, and Vatva including shift rosters and continuous stack emission profiles.",
+      },
+      { property: "og:title", content: "GIDC Industrial Clusters Registry · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/industries" },
+    ],
+  }),
   component: Page,
 });
 

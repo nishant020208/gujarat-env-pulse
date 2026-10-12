@@ -3,7 +3,17 @@ import { Inbox, Bell, ShieldCheck, FileText } from "lucide-react";
 import { PageShell } from "@/components/hppe/PageShell";
 
 export const Route = createFileRoute("/notifications")({
-  head: () => ({ meta: [{ title: "Notifications · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Environmental Advisory & Inspection Notifications · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Operational notifications feed for field inspectors, regional officers, and gram panchayats across Gujarat industrial zones.",
+      },
+      { property: "og:title", content: "Environmental Notifications · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/notifications" },
+    ],
+  }),
   component: Page,
 });
 

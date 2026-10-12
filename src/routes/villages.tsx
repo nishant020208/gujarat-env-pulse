@@ -5,7 +5,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { VILLAGES, aqiCategory } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/villages")({
-  head: () => ({ meta: [{ title: "Villages · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Monitored Villages & Gram Panchayat Index · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Index of vulnerable settlements, PHCs, schools and gram panchayats situated downwind of Gujarat industrial corridors.",
+      },
+      { property: "og:title", content: "Monitored Villages Index · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/villages" },
+    ],
+  }),
   component: Page,
 });
 

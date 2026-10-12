@@ -4,7 +4,17 @@ import { PageShell } from "@/components/hppe/PageShell";
 import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 
 export const Route = createFileRoute("/sensors")({
-  head: () => ({ meta: [{ title: "Sensor Network · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Continuous CAAQMS Sensor Mesh Registry · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Continuous Ambient Air Quality Monitoring Station (CAAQMS) node registry, battery levels, calibration drift, and live telemetry for Gujarat villages.",
+      },
+      { property: "og:title", content: "CAAQMS Sensor Network · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/sensors" },
+    ],
+  }),
   component: Page,
 });
 

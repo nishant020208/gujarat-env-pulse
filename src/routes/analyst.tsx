@@ -5,7 +5,17 @@ import { TrendChart } from "@/components/hppe/TrendChart";
 import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 
 export const Route = createFileRoute("/analyst")({
-  head: () => ({ meta: [{ title: "Prediction Lab · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Environmental Data Science & Prediction Lab · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Predictive atmospheric regression, diurnal industrial surge cycles, and air quality time-series analytics for Gujarat.",
+      },
+      { property: "og:title", content: "Environmental Data Science Lab · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/analyst" },
+    ],
+  }),
   component: Page,
 });
 

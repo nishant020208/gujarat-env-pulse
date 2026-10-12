@@ -14,7 +14,17 @@ import {
 import { useAuth } from "@/components/hppe/useAuth";
 
 export const Route = createFileRoute("/access")({
-  head: () => ({ meta: [{ title: "Access Control Center · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Personnel Access Control & Whitelist Ledger · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Role-based access control, institutional email whitelisting, and security authorization matrix for Gujarat environmental personnel.",
+      },
+      { property: "og:title", content: "Personnel Access Control · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/access" },
+    ],
+  }),
   component: AccessPage,
 });
 

@@ -6,7 +6,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { aqiCategory } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/analytics")({
-  head: () => ({ meta: [{ title: "Analytics · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Air Quality Time-Series Analytics · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Longitudinal particulate concentration trends, seasonal diurnal variances, and corridor-wide environmental intelligence analytics for Gujarat.",
+      },
+      { property: "og:title", content: "Air Quality Time-Series Analytics · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/analytics" },
+    ],
+  }),
   component: Page,
 });
 

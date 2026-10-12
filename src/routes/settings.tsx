@@ -3,7 +3,17 @@ import { Settings as SettingsIcon } from "lucide-react";
 import { PageShell } from "@/components/hppe/PageShell";
 
 export const Route = createFileRoute("/settings")({
-  head: () => ({ meta: [{ title: "Settings · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "System Configuration & Alert Thresholds · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Configure CAAQMS alert thresholds, WhatsApp dispatch gateways, language preferences, and API telemetry keys for the Gujarat Environment Pulse platform.",
+      },
+      { property: "og:title", content: "System Settings · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/settings" },
+    ],
+  }),
   component: Page,
 });
 

@@ -6,7 +6,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { useState } from "react";
 
 export const Route = createFileRoute("/complaints")({
-  head: () => ({ meta: [{ title: "Complaints · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Statutory Complaints Docket & Form-A Generator · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Statutory complaint docket generation, QR verification, and tracking under Section 21 of the Air Act 1981 for Gujarat Pollution Control Board.",
+      },
+      { property: "og:title", content: "Statutory Complaints Docket · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/complaints" },
+    ],
+  }),
   component: Page,
 });
 

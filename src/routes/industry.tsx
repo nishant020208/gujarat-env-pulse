@@ -4,7 +4,17 @@ import { PageShell } from "@/components/hppe/PageShell";
 import { INDUSTRIES } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/industry")({
-  head: () => ({ meta: [{ title: "Industry Console · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Industrial Plant Self-Compliance Desk · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Industry portal for GIDC manufacturing units to submit online CEMS stack telemetry, boiler fuel logs, and statutory consent compliance.",
+      },
+      { property: "og:title", content: "Industry Self-Compliance Desk · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/industry" },
+    ],
+  }),
   component: Page,
 });
 

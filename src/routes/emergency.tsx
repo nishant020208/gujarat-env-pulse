@@ -5,7 +5,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { useState } from "react";
 
 export const Route = createFileRoute("/emergency")({
-  head: () => ({ meta: [{ title: "Emergency Center · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Hazardous Emission Emergency Operations Cell · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "District emergency response cell and hazardous chemical surge dispatch for GPCB, fire services, and district collectorates.",
+      },
+      { property: "og:title", content: "Hazardous Emission Emergency Cell · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/emergency" },
+    ],
+  }),
   component: Page,
 });
 

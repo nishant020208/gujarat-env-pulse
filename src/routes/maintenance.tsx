@@ -4,7 +4,17 @@ import { PageShell } from "@/components/hppe/PageShell";
 import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 
 export const Route = createFileRoute("/maintenance")({
-  head: () => ({ meta: [{ title: "Maintenance Bay · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Sensor Maintenance & Calibration Bay · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Field engineering maintenance bay, battery replacement schedule, and sensor calibration diagnostics for Gujarat CAAQMS mesh.",
+      },
+      { property: "og:title", content: "Sensor Maintenance Bay · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/maintenance" },
+    ],
+  }),
   component: Page,
 });
 

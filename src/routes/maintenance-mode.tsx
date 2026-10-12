@@ -3,7 +3,17 @@ import { motion } from "framer-motion";
 import { Wrench, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/maintenance-mode")({
-  head: () => ({ meta: [{ title: "Maintenance · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Scheduled System Maintenance · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Platform scheduled telemetry maintenance. Real-time CAAQMS sensor ingestion continues uninterrupted.",
+      },
+      { property: "og:title", content: "Scheduled System Maintenance · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/maintenance-mode" },
+    ],
+  }),
   component: () => (
     <div className="min-h-screen grid place-items-center px-4">
       <motion.div

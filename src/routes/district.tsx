@@ -5,7 +5,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { VILLAGES, aqiCategory } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/district")({
-  head: () => ({ meta: [{ title: "District Overview · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "District Collectorate Environmental Oversight · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "District magistrate environmental monitoring portal for Valsad, Bharuch, Surat, and Ahmedabad overseeing industrial estate compliance.",
+      },
+      { property: "og:title", content: "District Environmental Oversight · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/district" },
+    ],
+  }),
   component: Page,
 });
 

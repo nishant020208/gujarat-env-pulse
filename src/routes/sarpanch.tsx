@@ -5,7 +5,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { VILLAGES, aqiCategory } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/sarpanch")({
-  head: () => ({ meta: [{ title: "Gram Panchayat · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Gram Panchayat Air Quality Advisory Desk · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Village-level air quality telemetry and health advisories for sarpanches across Sarigam, Piraman, Vatva Gam, and Jhagadia.",
+      },
+      { property: "og:title", content: "Gram Panchayat Advisory Desk · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/sarpanch" },
+    ],
+  }),
   component: Page,
 });
 

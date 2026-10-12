@@ -4,7 +4,17 @@ import { PageShell } from "@/components/hppe/PageShell";
 import { useState } from "react";
 
 export const Route = createFileRoute("/broadcast")({
-  head: () => ({ meta: [{ title: "Broadcast · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Emergency Public Health & Sarpanch Advisory Broadcast · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Multi-lingual emergency broadcast system dispatching WhatsApp, SMS, and siren alerts in Gujarati, Hindi, and English during acute pollution surges.",
+      },
+      { property: "og:title", content: "Emergency Broadcast System · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/broadcast" },
+    ],
+  }),
   component: Page,
 });
 

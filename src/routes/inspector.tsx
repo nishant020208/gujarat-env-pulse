@@ -3,7 +3,17 @@ import { ClipboardCheck, MapPin } from "lucide-react";
 import { PageShell } from "@/components/hppe/PageShell";
 
 export const Route = createFileRoute("/inspector")({
-  head: () => ({ meta: [{ title: "Inspection Desk · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Field Inspection Roster & Enforcement Protocols · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "GPCB field officer inspection roster, stack sampling assignments, and evidence chain of custody across Gujarat industrial corridors.",
+      },
+      { property: "og:title", content: "Field Inspection Roster · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/inspector" },
+    ],
+  }),
   component: Page,
 });
 

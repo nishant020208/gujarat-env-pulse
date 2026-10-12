@@ -4,7 +4,17 @@ import { ShieldOff, ArrowLeft, Mail } from "lucide-react";
 import { denialMessage, type AccessDenialReason } from "@/lib/hppe/access";
 
 export const Route = createFileRoute("/unauthorized")({
-  head: () => ({ meta: [{ title: "Access denied · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Authorization Required · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Access restricted to authorized Gujarat Pollution Control Board officers and designated stakeholders.",
+      },
+      { property: "og:title", content: "Access Restricted · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/unauthorized" },
+    ],
+  }),
   validateSearch: (s: Record<string, unknown>) => ({ reason: (s.reason as AccessDenialReason | undefined) }),
   component: UnauthorizedPage,
 });

@@ -6,7 +6,17 @@ import { useLiveReadings } from "@/components/hppe/useLiveReadings";
 import { aqiCategory } from "@/lib/hppe/data";
 
 export const Route = createFileRoute("/alerts")({
-  head: () => ({ meta: [{ title: "Pollution Alerts · HPEE" }] }),
+  head: () => ({
+    meta: [
+      { title: "Critical Pollution Surge Alerts & Early Warnings · Gujarat Environment Pulse (HPPE)" },
+      {
+        name: "description",
+        content: "Real-time industrial pollution surge alarms, threshold breach feeds, and multi-tier public health advisories across Gujarat.",
+      },
+      { property: "og:title", content: "Pollution Surge Alerts · Gujarat Environment Pulse" },
+      { property: "og:url", content: "https://hppe.gujarat.gov.in/alerts" },
+    ],
+  }),
   component: Page,
 });
 
