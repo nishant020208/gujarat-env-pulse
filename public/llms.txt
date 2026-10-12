@@ -1,0 +1,36 @@
+# Gujarat Environment Pulse · Hyperlocal Pollution Evidence Engine (HPPE)
+> State of Gujarat Official Environmental Telemetry & Compliance Platform
+
+## Overview
+Gujarat Environment Pulse (HPPE) is a mission-critical environmental intelligence, Continuous Ambient Air Quality Monitoring (CAAQMS), and statutory pollution enforcement engine operating in partnership with the Gujarat Pollution Control Board (GPCB) and the Department of Forests and Environment, Government of Gujarat.
+
+## Key Industrial Corridors Monitored
+- **Vapi GIDC Industrial Area**: Phase-I, Phase-II, CETP outlets, chemical and dyes manufacturing belt.
+- **Ankleshwar Industrial Estate**: Asia's largest chemical and pharmaceutical cluster, bulk drug synthesis, effluent conveyance.
+- **Dahej PCPIR**: Petroleum, Chemicals and Petrochemical Investment Region, deep-sea marine discharge, flare gas monitoring.
+- **Sachin Industrial Estate**: Surat synthetic textile, dyeing, printing, and sizing units.
+- **Panoli GIDC**: Agrochem and pesticide formulation corridor.
+- **Nandesari Industrial Area**: Vadodara specialty chemicals and heavy organic synthesis.
+- **Vatva & Naroda GIDC**: Ahmedabad dyes, pigments, and intermediate chemical manufacturers.
+
+## System Capabilities
+1. **Real-time CAAQMS Telemetry**: Continuous sensor acquisition for PM2.5, PM10, SO2, NOx, CO, Ozone, Total VOCs, temperature, humidity, wind velocity, and wind azimuth.
+2. **Plume Dispersion & Source Attribution**: Gaussian puff atmospheric boundary modeling calculating emission dispersal towards gram panchayat settlements.
+3. **Statutory Complaint Docket Generator**: Automated generation of legal show-cause notices and inspection dockets under Section 21 of the Air (Prevention and Control of Pollution) Act, 1981 and Section 25/26 of the Water Act, 1974.
+4. **Field Geotagged GIS**: GPS-stamped photo, FLIR thermal, and stack evidence logging with SHA-256 chain of custody for National Green Tribunal (NGT) legal admissibility.
+5. **Emergency Citizen Advisories**: Multi-lingual alert dissemination (Gujarati, Hindi, English) for sensitive respiratory groups and sarpanches during acute emission spikes.
+
+## Key Endpoints
+- Public Portal: https://hppe.gujarat.gov.in/
+- Command Center: https://hppe.gujarat.gov.in/dashboard
+- Statewide GIS Map: https://hppe.gujarat.gov.in/map
+- Field Inspection GIS: https://hppe.gujarat.gov.in/field
+- Statutory Complaints: https://hppe.gujarat.gov.in/complaints
+- Sensor Registry: https://hppe.gujarat.gov.in/sensors
+- GIDC Industries: https://hppe.gujarat.gov.in/industries
+- Official Sign In: https://hppe.gujarat.gov.in/login
+
+## Regulatory References
+- National Ambient Air Quality Standards (NAAQS), CPCB Notification 2009
+- Environment (Protection) Act, 1986
+- Gujarat Pollution Control Board Guidelines for CEMS/CAAQMS Installation (2020)

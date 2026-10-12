@@ -1,0 +1,23 @@
+# Gujarat Environment Pulse (HPPE) - Robots Policy
+# https://hppe.gujarat.gov.in
+
+User-agent: *
+Allow: /
+Allow: /map
+Allow: /dashboard
+Allow: /field
+Allow: /complaints
+Allow: /industries
+Allow: /sensors
+Allow: /reports
+Allow: /compliance
+Allow: /district
+Allow: /sarpanch
+Allow: /analyst
+Allow: /alerts
+Allow: /help
+Disallow: /settings
+Disallow: /access
+
+# Sitemap Location
+Sitemap: https://hppe.gujarat.gov.in/sitemap.xml

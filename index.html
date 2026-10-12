@@ -2,22 +2,100 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pollution Engine</title>
-    <meta name="description" content="Real-time environmental intelligence and GSPCB complaint generation for Gujarat industrial-corridor villages." />
-    <meta property="og:title" content="Pollution Engine" />
-    <meta property="og:description" content="Real-time environmental intelligence and GSPCB complaint generation for Gujarat industrial-corridor villages." />
+    
+    <!-- Primary Title and Meta -->
+    <title>Gujarat Environment Pulse · Hyperlocal Pollution Evidence Engine (HPPE) | GPCB</title>
+    <meta name="description" content="Statutory real-time environmental monitoring, continuous CAAQMS air quality telemetry, and GPCB complaint generation for Gujarat industrial corridors." />
+    <meta name="keywords" content="Gujarat Environment, GPCB, CAAQMS, AQI Gujarat, Vapi GIDC, Ankleshwar GIDC, Dahej PCPIR, Sachin, Vatva, Pollution Evidence, Environmental Compliance" />
+    <meta name="author" content="Gujarat Pollution Control Board (GPCB) & Department of Forests and Environment" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://hppe.gujarat.gov.in" />
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0d1f2d" />
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4122ba99-1e3c-44b6-9dff-e2a0733055be" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:title" content="Pollution Engine" />
-    <meta name="twitter:description" content="Real-time environmental intelligence and GSPCB complaint generation for Gujarat industrial-corridor villages." />
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/4122ba99-1e3c-44b6-9dff-e2a0733055be" />
+    <meta property="og:url" content="https://hppe.gujarat.gov.in" />
+    <meta property="og:site_name" content="Gujarat Environment Pulse (HPPE)" />
+    <meta property="og:title" content="Gujarat Environment Pulse · Hyperlocal Pollution Evidence Engine" />
+    <meta property="og:description" content="Real-time environmental intelligence, stack emissions surveillance and GPCB statutory complaint generation for Gujarat industrial corridor villages." />
+    <meta property="og:image" content="https://hppe.gujarat.gov.in/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gujarat Environment Pulse Command Center & Sensor Network" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gujarat Environment Pulse · Hyperlocal Pollution Evidence Engine" />
+    <meta name="twitter:description" content="Real-time environmental intelligence, stack emissions surveillance and GPCB statutory complaint generation for Gujarat." />
+    <meta name="twitter:image" content="https://hppe.gujarat.gov.in/og-image.png" />
+
+    <!-- Typography & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+    <!-- Government Organization and Local Business Schema (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["GovernmentOrganization", "LocalBusiness"],
+          "@id": "https://hppe.gujarat.gov.in/#organization",
+          "name": "Gujarat Pollution Control Board - Hyperlocal Pollution Evidence Engine",
+          "alternateName": "Gujarat Environment Pulse (HPPE)",
+          "url": "https://hppe.gujarat.gov.in",
+          "logo": "https://hppe.gujarat.gov.in/favicon.svg",
+          "image": "https://hppe.gujarat.gov.in/og-image.png",
+          "description": "Statutory environmental surveillance and hyperlocal pollution monitoring portal for Gujarat industrial corridors (Vapi, Ankleshwar, Dahej, Sachin, Vatva).",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Paryavaran Bhavan, Sector 10-A",
+            "addressLocality": "Gandhinagar",
+            "addressRegion": "Gujarat",
+            "postalCode": "382010",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 23.2156,
+            "longitude": 72.6369
+          },
+          "telephone": "+91-79-23232152",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Gujarat State"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://hppe.gujarat.gov.in/#website",
+          "url": "https://hppe.gujarat.gov.in",
+          "name": "Gujarat Environment Pulse",
+          "publisher": {
+            "@id": "https://hppe.gujarat.gov.in/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://hppe.gujarat.gov.in/map?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
